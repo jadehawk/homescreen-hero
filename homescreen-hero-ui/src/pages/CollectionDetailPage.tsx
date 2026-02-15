@@ -63,6 +63,7 @@ export default function CollectionDetailPage() {
     const [searchLoading, setSearchLoading] = useState(false);
     const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
     const [adding, setAdding] = useState(false);
+    const [pendingRemove, setPendingRemove] = useState<{ ratingKey: string; title: string } | null>(null);
     const [searchOffset, setSearchOffset] = useState(0);
     const [searchHasMore, setSearchHasMore] = useState(true);
     const [searchTotal, setSearchTotal] = useState(0);
@@ -682,7 +683,7 @@ export default function CollectionDetailPage() {
                                             disabled={searchLoading}
                                             className="px-6 py-3 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-white text-sm font-medium border border-slate-700 hover:border-slate-600 transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            {searchLoading ? "Loading..." : `Load More (${searchTotal - searchResults.length} remaining)`}
+                                            {searchLoading ? "Loading..." : `Load More (${searchTotal - (searchOffset + searchResults.length)} remaining)`}
                                         </button>
                                     </div>
                                 )}
